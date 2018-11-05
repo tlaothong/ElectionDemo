@@ -1,17 +1,63 @@
 <ion-header>
-  <ion-navbar>
-    <ion-title>Home</ion-title>
+  <ion-navbar color="danger"> 
+    <ion-title>กราฟ</ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-  <h2>Welcome to Ionic!</h2>
-  <p>
-    This starter project comes with simple tabs-based layout for apps
-    that are going to primarily use a Tabbed UI.
-  </p>
-  <p>
-    Take a look at the <code>src/pages/</code> directory to add or change tabs,
-    update any existing page or create new pages.
-  </p>
+
+  <ion-segment [(ngModel)]="chartE">
+    <ion-segment-button value="totlaMembers">
+      chart จำนวนสมาชิกวุฒิสภาทั้งหมด
+    </ion-segment-button>
+    <ion-segment-button value="districtMembers">
+      chart จำนวนสมาชิกวุฒิสภาแบบแบ่งเขต
+    </ion-segment-button>
+    <ion-segment-button value="partyLists">
+      chart จำนวนสมาชิกวุฒิสภาแบบสัดส่วน
+    </ion-segment-button>
+  </ion-segment>
+
+  <div [ngSwitch]="chartE">
+    <ion-list *ngSwitchCase="'totlaMembers'">
+      <div style="display: block">
+        <canvas baseChart 
+        width="45" 
+        height="60"  
+        [datasets]="barChartData" 
+        [labels]="barChartLabels" 
+        [options]="barChartOptions" 
+        [legend]="barChartLegend"
+        [chartType]="barChartType"></canvas>
+      </div>
+    </ion-list>
+
+    <ion-list *ngSwitchCase="'districtMembers'">
+      <div style="display: block">
+        <canvas baseChart 
+        width="45" 
+        height="60"  
+        [datasets]="barChartDataDistrict" 
+        [labels]="barChartLabels" 
+        [options]="barChartOptions" 
+        [legend]="barChartLegend"
+        [chartType]="barChartType"></canvas>
+      </div>
+    </ion-list>
+
+    <ion-list *ngSwitchCase="'partyLists'">
+        <div style="display: block">
+          <canvas baseChart 
+          width="45" 
+          height="60"  
+          [datasets]="barChartDataPartyList" 
+          [labels]="barChartLabels" 
+          [options]="barChartOptions" 
+          [legend]="barChartLegend"
+          [chartType]="barChartType"></canvas>
+        </div>
+      </ion-list>
+  </div>
+
+
 </ion-content>
